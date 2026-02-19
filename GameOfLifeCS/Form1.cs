@@ -25,6 +25,7 @@ namespace GameOfLifeCS
         private TrackBar speedTrackBar = null!;
         private Label speedLabel = null!;
         private TrackBar volumeTrackBar = null!;
+        private Label modeLabel = null!;
 
         public Form1()
         {
@@ -240,6 +241,11 @@ namespace GameOfLifeCS
             {
                 use3DRendering = !use3DRendering;
                 ((ToolStripMenuItem)s!).Checked = use3DRendering;
+                
+                // Update mode label
+                modeLabel.Text = use3DRendering ? "Mode: 3D (View Only)" : "Mode: 2D (Editable)";
+                modeLabel.ForeColor = use3DRendering ? Color.Orange : Color.LimeGreen;
+                
                 gamePanel.Invalidate();
             })
             {
@@ -431,6 +437,16 @@ namespace GameOfLifeCS
                 Font = new Font(Font.FontFamily, 10, FontStyle.Bold)
             };
             controlPanel.Controls.Add(generationLabel);
+
+            modeLabel = new Label
+            {
+                Text = "Mode: 3D (View Only)",
+                Location = new Point(800, 15),
+                AutoSize = true,
+                ForeColor = Color.Orange,
+                Font = new Font(Font.FontFamily, 9, FontStyle.Bold)
+            };
+            controlPanel.Controls.Add(modeLabel);
         }
 
         private void ApplyTheme()
